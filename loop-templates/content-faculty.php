@@ -15,7 +15,7 @@
     <div class="faculty-bio col-md-4">
     	<?php 
         if ( has_post_thumbnail() ) {
-          the_post_thumbnail('large', array('class' => 'faculty-bio-image responsive'));
+          the_post_thumbnail('large', array('class' => 'faculty-bio-image responsive', 'alt' => 'Faculty portrait.'));
         } 
         ?>
     </div>

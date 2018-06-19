@@ -205,12 +205,14 @@ function create_faculty_cpt() {
     'menu_icon' => 'dashicons-universal-access-alt',
   );
   register_post_type( 'faculty', $args );
-
+  
+  // flush rewrite rules because we changed the permalink structure -----NOT FULLY TESTED !!!!!!!!!!!!!!!!!!!!!!!!!
+  global $wp_rewrite;
+  $wp_rewrite->flush_rules();
 }
 add_action( 'init', 'create_faculty_cpt', 0 );
 
 //FACULTY BIO FUNCTIONS
-
 function the_faculty_degree() {
   global $post;
   $degrees = get_field( "degree", $post->ID );
@@ -263,4 +265,187 @@ function the_faculty_email(){
    }
 }
 
+//ACF option that will automatically include these in sites with ACF active
+if( function_exists('acf_add_local_field_group') ):
 
+acf_add_local_field_group(array (
+  'key' => 'group_5b290ff211e39',
+  'title' => 'faculty details',
+  'fields' => array (
+    array (
+      'key' => 'field_5b290ff8b299b',
+      'label' => 'Degree',
+      'name' => 'degree',
+      'type' => 'checkbox',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array (
+        'Ph.D.' => 'Ph.D.',
+        'M.S.' => 'M.S.',
+        'M.Ed.' => 'M.Ed.',
+        'J.D.' => 'J.D.',
+      ),
+      'allow_custom' => 0,
+      'save_custom' => 0,
+      'default_value' => array (
+      ),
+      'layout' => 'vertical',
+      'toggle' => 0,
+      'return_format' => 'value',
+    ),
+    array (
+      'key' => 'field_5b29104bb299c',
+      'label' => 'Title',
+      'name' => 'title',
+      'type' => 'checkbox',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array (
+        'Academic Advisor' => 'Academic Advisor',
+        'Adjunct Instructor' => 'Adjunct Instructor',
+        'Assistant Director' => 'Assistant Director',
+        'Associate Professor' => 'Associate Professor',
+        'Assistant Professor' => 'Assistant Professor',
+        'Director' => 'Director',
+        'Full Professor' => 'Full Professor',
+        'Graduate Program Director' => 'Graduate Program Director',
+        'Instructor' => 'Instructor',
+      ),
+      'allow_custom' => 0,
+      'save_custom' => 0,
+      'default_value' => array (
+      ),
+      'layout' => 'vertical',
+      'toggle' => 0,
+      'return_format' => 'value',
+    ),
+    array (
+      'key' => 'field_5b2910dd36a77',
+      'label' => 'Area of Expertise',
+      'name' => 'area_of_expertise',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b2910f6169d6',
+      'label' => 'Office Location',
+      'name' => 'office_location',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b291100cbdb3',
+      'label' => 'Phone Number',
+      'name' => 'phone_number',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b29111bb948a',
+      'label' => 'Email Address',
+      'name' => 'email_address',
+      'type' => 'email',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+    ),
+    array (
+      'key' => 'field_5b29112bf8a27',
+      'label' => 'Website',
+      'name' => 'website',
+      'type' => 'url',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+    ),
+  ),
+  'location' => array (
+    array (
+      array (
+        'param' => 'post_type',
+        'operator' => '==',
+        'value' => 'faculty',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => '',
+  'active' => 1,
+  'description' => '',
+));
+
+endif;
+
+//attempt to auto activate ACF Pro
+$result = activate_plugin('advanced-custom-fields-pro/acf.php' );
+if ( is_wp_error( $result ) ) {
+  // Process Error
+}
