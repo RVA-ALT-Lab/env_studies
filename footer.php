@@ -12,18 +12,19 @@ $container = get_theme_mod( 'understrap_container_type' );
 ?>
 
 <?php get_sidebar( 'footerfull' ); ?>
-   <div class="jumbotron water">
+   <div class="jumbotron water">   
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
+           <h2 class="major-section">VCU Life Sciences</h2>
           <div class="row">
           <div class="col-lg-4">
             <div class="card">
               <img class="card-img-top" src="<?php echo THEME_IMG_PATH; ?>bio-complexity.jpg" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">
+                <h3 class="card-title">
                   Center for the Study of Biological Complexity
-                </h5>
+                </h3>
               </div>
             </div>
           </div>
@@ -31,9 +32,9 @@ $container = get_theme_mod( 'understrap_container_type' );
             <div class="card">
               <img class="card-img-top" src="<?php echo THEME_IMG_PATH; ?>rice-center.jpg" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">
+                <h3 class="card-title">
                   Rice Rivers Center
-                </h5>
+                </h3>
               </div>
             </div>
           </div>
@@ -41,9 +42,9 @@ $container = get_theme_mod( 'understrap_container_type' );
             <div class="card">
               <img class="card-img-top" src="<?php echo THEME_IMG_PATH; ?>env-studies.jpg" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">
+                <a href="#"><h3 class="card-title hvr-sweep-to-right">
 				Center for Life Sciences Education
-                </h5>
+                </h3></a>
               </div>
             </div>
           </div>
