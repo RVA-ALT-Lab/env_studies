@@ -231,4 +231,36 @@ function the_faculty_title() {
   } 
 }
 
+function the_faculty_expertise(){
+   global $post;
+   $expertise = get_field( "area_of_expertise", $post->ID );
+   if ($expertise){
+    echo '<div class="expertise">Area of expertise: '.$expertise.'</div>';
+   }
+}
+
+function the_faculty_phone(){
+   global $post;
+   $phone = get_field( "phone_number", $post->ID );
+   if ($phone){
+    echo '<div class="phone">Phone: <a href="tel:'.$phone.'">'.$phone.'</a></div>';
+   }
+}
+
+function the_faculty_office(){
+   global $post;
+   $office = get_field( "office_location", $post->ID );
+   if ($office){
+    echo '<div class="office">Office: '.$office.'</div>';
+   }
+}
+
+function the_faculty_email(){
+   global $post;
+   $email = get_field( "email_address", $post->ID );
+   if ($email){
+    echo '<div class="email">Email: <a href="mailto:'.$email.'">'.$email.'</a></div>';
+   }
+}
+
 

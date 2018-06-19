@@ -7,29 +7,29 @@
 
 ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-
-	<header class="entry-header">
-
-
+	<header class="entry-header faculty">
     <h1 class="faculty-title"><?php echo get_the_title(); the_faculty_degree();?></h1>   		
-    <div class="faculty-titles"><?php the_faculty_title();?></div>
 	</header><!-- .entry-header -->
+
   <div class="row">
     <div class="faculty-bio col-md-4">
     	<?php 
         if ( has_post_thumbnail() ) {
           the_post_thumbnail('large', array('class' => 'faculty-bio-image responsive'));
-        } else {
-
-        }
+        } 
         ?>
     </div>
-
-    <div class="col-md-8 faculty-bio-content">  
-    <?php the_content();?>
-     
-      </div>
-    </div>        
+    <div class="col-md-4 faculty-bio-content">  
+      <div class="faculty-titles"><?php the_faculty_title();?></div>
+      <?php the_faculty_expertise();?>           
+    </div>
+    <div class="col-md-4 faculty-contact-info">
+      <?php the_faculty_phone();?>
+      <?php the_faculty_office();?>    
+      <?php the_faculty_email();?>    
+      <?php the_content();?>
+    </div>
+  </div>        
 
 	<footer class="entry-footer">
 
