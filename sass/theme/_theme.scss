@@ -38,7 +38,7 @@ li.active {
 
 
 //************************BASIC CONTENT CHOICES************************
-article a {
+article a, .faculty-contact-info a {
 	text-decoration: underline;
 	color: $black;
 	text-decoration-color: $gold;
@@ -206,6 +206,11 @@ footer .fa:hover{
 }
 
 //FACULTY 
+
+.the-faculty {
+	margin-bottom: 3em;
+	border-bottom: 1px solid $aqua;
+}
 
 .faculty-title, .faculty .row {
 	margin: 0 15px 1em 15px;

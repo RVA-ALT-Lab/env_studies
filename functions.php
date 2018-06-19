@@ -265,6 +265,16 @@ function the_faculty_email(){
    }
 }
 
+function the_faculty_website(){
+   global $post;
+   $faculty = $post->post_title;
+   $website = get_field( "website", $post->ID );
+   if ($website){
+    echo '<div class="website"><a href="'.$website.'">Visit the website of '. $faculty .'</a></div>';
+   }
+}
+
+
 //ACF option that will automatically include these in sites with ACF active
 if( function_exists('acf_add_local_field_group') ):
 

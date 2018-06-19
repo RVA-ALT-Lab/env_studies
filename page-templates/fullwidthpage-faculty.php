@@ -38,26 +38,31 @@ $container = get_theme_mod( 'understrap_container_type' );
 					          ?>
 							 <?php if( $the_query->have_posts() ): ?>
 						          <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-						           <div class="row">
-						           	<div class="col-md-12"><h2 class="faculty-title"><?php echo get_the_title(); the_faculty_degree();?></h2></div>   	
-								    <div class="faculty-bio col-md-4">
+						           <div class="row the-faculty">
+								    <div class="faculty-img col-md-4">
 								    	<?php 
 								        if ( has_post_thumbnail() ) {
 								          the_post_thumbnail('large', array('class' => 'faculty-bio-image responsive', 'alt' => 'Faculty portrait.'));
 								        } 
 								        ?>
 								    </div>
-								    <div class="col-md-4 faculty-bio-content">  
-								      <div class="faculty-titles"><?php the_faculty_title();?></div>
-								      <?php the_faculty_expertise();?>           
-								    </div>
-								    <div class="col-md-4 faculty-contact-info">
-								      <?php the_faculty_phone();?>
-								      <?php the_faculty_office();?>    
-								      <?php the_faculty_email();?>    
-								      <?php the_content();?>
-								    </div>
-								  </div>        
+								    <div class="col-md-8">
+								    	<h2 class="faculty-title"><?php echo get_the_title(); the_faculty_degree();?></h2>
+								    	<div class="row">
+										    <div class="col-md-6 faculty-bio-content">  
+										      <div class="faculty-titles"><?php the_faculty_title();?></div>
+										      <?php the_faculty_expertise();?>           
+										    </div>
+										    <div class="col-md-6 faculty-contact-info">
+										      <?php the_faculty_phone();?>
+										      <?php the_faculty_office();?>    
+										      <?php the_faculty_email();?> 
+										      <?php the_faculty_website();?>   
+										      <?php the_content();?>
+										    </div>
+										  </div>
+										</div>  
+									</div>          
 						          <?php endwhile; ?>
 						       <?php endif; ?>
 
