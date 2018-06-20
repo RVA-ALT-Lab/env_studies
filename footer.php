@@ -21,21 +21,25 @@ $container = get_theme_mod( 'understrap_container_type' );
           <div class="col-lg-4">
             <div class="card">
               <img class="card-img-top" src="<?php echo THEME_IMG_PATH; ?>bio-complexity.jpg" alt="Card image cap">
-              <div class="card-body hvr-underline-from-center">
-                <h3 class="card-title">
-                  <a href="#">Center for the Study of Biological Complexity</a>
-                </h3>
-              </div>
+              <a href="#">
+                <div class="card-body hvr-underline-from-center">
+                  <h3 class="card-title">
+                    Center for the Study of Biological Complexity
+                  </h3>
+                </div>
+              </a>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="card">
               <img class="card-img-top" src="<?php echo THEME_IMG_PATH; ?>rice-center.jpg" alt="Card image cap">
-              <div class="card-body hvr-underline-from-center">
-                <h3 class="card-title">
-                  <a href="#">Rice Rivers Center</a>
-                </h3>
-              </div>
+               <a href="#"> 
+                <div class="card-body hvr-underline-from-center">
+                  <h3 class="card-title">
+                    Rice Rivers Center<br>&nbsp;
+                  </h3>
+                </div>
+              </a>  
             </div>
           </div>
           <div class="col-lg-4">

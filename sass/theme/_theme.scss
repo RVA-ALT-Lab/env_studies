@@ -5,6 +5,12 @@
   justify-content: flex-end;
 }
 
+.navbar-brand {
+	font-family: 'Roboto', sans-serif;
+	text-transform: uppercase;
+	font-weight: 300;
+}
+
 //gets rid of round edges on child menu elements
 .dropdown-menu {
 	border-radius: 0;
@@ -21,7 +27,7 @@
 }
 
 #the-menu {
-	background-color: #efefef !important;
+	background-color: $white !important;
 }
 
 li.active {
