@@ -454,8 +454,9 @@ acf_add_local_field_group(array (
 
 endif;
 
-//attempt to auto activate ACF Pro
+/*/attempt to auto activate ACF Pro
 $result = activate_plugin('advanced-custom-fields-pro/acf.php' );
 if ( is_wp_error( $result ) ) {
   // Process Error
 }
+*/
