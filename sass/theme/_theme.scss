@@ -5,6 +5,10 @@
   justify-content: flex-end;
 }
 
+.navbar-light {
+	border-bottom: 1px solid $light-gray;
+}
+
 .navbar-brand {
 	font-family: 'Roboto', sans-serif;
 	text-transform: uppercase;
@@ -56,8 +60,7 @@ article a:hover {
 }
 
 h1, h2, h3, h4, h5 {
-	//font-family: 'Roboto', sans-serif;
-	font-family: x-locale-heading-primary,zillaslab,Palatino,"Palatino Linotype",x-locale-heading-secondary,serif;
+	font-family: 'Roboto', sans-serif;	
 	font-size: 2.5em;
 	margin: 1em 0 0 0;
 	font-weight: bold;
@@ -163,6 +166,36 @@ ul {
 
 .water a:hover {
 	text-decoration: none;
+}
+
+//Faculty page 
+
+.sorting-hat {
+	display: flex;
+	justify-content: space-around;
+}
+
+.sorting-hat button {
+	width: 250px;
+	background-color: $white;
+	border: 1px solid $aqua;
+	-webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.sorting-hat button:hover {
+	background-color: $aqua;
+	color: $white;
+	cursor: pointer;
+}
+
+
+.hide {
+	display: none;
+}
+
+.sorting-hat button.activated {
+	background-color: $aqua;
 }
 
 //FOOTER 

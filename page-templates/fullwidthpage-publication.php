@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: Faculty Full Width Page
+ * Template Name: Publication Full Width Page
  *
- * Template for displaying a page without sidebar for faculty.
+ * Template for displaying a publication page without sidebar for publications.
  *
  * @package understrap
  */
@@ -18,9 +18,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 		<div class="row">
 
 			<div class="col-md-12 content-area" id="primary">
-				<div class="sorting-hat">
-					<button id="academic_button">ACADEMIC FACULTY</button><button id="staff_button" >STAFF</button><button id="adjunct_button">ADJUNCTS & AFFILIATES</button>
-				</div>	
+
 				<main class="site-main" id="main" role="main">
 
 					<?php while ( have_posts() ) : the_post(); ?>
@@ -30,7 +28,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 							 $args = array(
 					            'numberposts' => -1,
-					            'post_type'   => 'faculty',					           
+					            'post_type'   => 'publication',					           
 					            //do the published option and consider sorting
 					          );
 
@@ -40,28 +38,22 @@ $container = get_theme_mod( 'understrap_container_type' );
 					          ?>
 							 <?php if( $the_query->have_posts() ): ?>
 						          <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-						           <div class="row the-faculty <?php the_faculty_group();?>">
+						           <div class="row the-faculty">
 								    <div class="faculty-img col-md-4">
 								    	<?php 
 								        if ( has_post_thumbnail() ) {
-								          the_post_thumbnail('large', array('class' => 'faculty-bio-image responsive', 'alt' => 'Faculty portrait.'));
+								          the_post_thumbnail('large', array('class' => 'publication-image responsive', 'alt' => 'Image representing the document.'));
 								        } 
 								        ?>
 								    </div>
 								    <div class="col-md-8">
-								    	<h2 class="faculty-title"><?php echo get_the_title(); the_faculty_degree();?></h2>
+								    	<h2 class="publication-title"><?php echo get_the_title();?></h2>
 								    	<div class="row">
 										    <div class="col-md-6 faculty-bio-content">  
-										      <div class="faculty-titles"><?php the_faculty_title();?></div>
-										      <?php the_faculty_expertise();?>           
+										      <?php the_content());?>           
 										    </div>
-										    <div class="col-md-6 faculty-contact-info">
-										      <?php the_faculty_phone();?>
-										      <?php the_faculty_office();?>    
-										      <?php the_faculty_email();?> 
-										      <?php the_faculty_website();?>   
+										    <div class="col-md-6 faculty-contact-info">										    
 										      <?php the_content();?>
-										      <?php the_faculty_group();?>
 										    </div>
 										  </div>
 										</div>  
