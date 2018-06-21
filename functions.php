@@ -284,7 +284,7 @@ function the_faculty_degree() {
 
   if( $degrees ) {
     foreach ($degrees as $degree )    
-      echo ', '.$degree;
+      return ', '.$degree;
   } 
 }
 
@@ -294,7 +294,7 @@ function the_faculty_title() {
 
   if( $titles ) {
     foreach ($titles as $title )    
-      echo '<div class="title">'.$title.'</div>';
+      return '<div class="title">'.$title.'</div>';
   } 
 }
 
@@ -302,7 +302,7 @@ function the_faculty_expertise(){
    global $post;
    $expertise = get_field( "area_of_expertise", $post->ID );
    if ($expertise){
-    echo '<div class="expertise">Area of expertise: '.$expertise.'</div>';
+    return '<div class="expertise">Area of expertise: '.$expertise.'</div>';
    }
 }
 
@@ -310,7 +310,7 @@ function the_faculty_phone(){
    global $post;
    $phone = get_field( "phone_number", $post->ID );
    if ($phone){
-    echo '<div class="phone">Phone: <a href="tel:'.$phone.'">'.$phone.'</a></div>';
+    return '<div class="phone">Phone: <a href="tel:'.$phone.'">'.$phone.'</a></div>';
    }
 }
 
@@ -318,7 +318,7 @@ function the_faculty_office(){
    global $post;
    $office = get_field( "office_location", $post->ID );
    if ($office){
-    echo '<div class="office">Office: '.$office.'</div>';
+    return '<div class="office">Office: '.$office.'</div>';
    }
 }
 
@@ -326,7 +326,7 @@ function the_faculty_email(){
    global $post;
    $email = get_field( "email_address", $post->ID );
    if ($email){
-    echo '<div class="email">Email: <a href="mailto:'.$email.'">'.$email.'</a></div>';
+    return '<div class="email">Email: <a href="mailto:'.$email.'">'.$email.'</a></div>';
    }
 }
 
@@ -335,7 +335,7 @@ function the_faculty_website(){
    $faculty = $post->post_title;
    $website = get_field( "website", $post->ID );
    if ($website){
-    echo '<div class="website"><a href="'.$website.'">Visit the website of '. $faculty .'</a></div>';
+    return '<div class="website"><a href="'.$website.'">Visit the website of '. $faculty .'</a></div>';
    }
 }
 
@@ -346,11 +346,118 @@ function the_faculty_group() {
 
   if( $group ) {
     foreach ($group as $the_group )    
-      echo strtolower($the_group);
+      return strtolower($the_group);
   } 
 }
 
-//ACF option that will automatically include these in sites with ACF active
+
+//shortcode for faculty content by type
+function altlab_faculty_shortcode( $atts, $content = null ) {
+    extract(shortcode_atts( array(
+         'type' => '',  
+    ), $atts));     
+
+    $html ='';
+
+               $args = array(
+                      'numberposts' => -1,
+                      'post_type'   => 'faculty', 
+                      'post_status' => 'publish',                   
+                      'meta_query' => array(
+                      'relation'    => 'OR',
+                      array(
+                        'key'   => 'staff_group',
+                        'value'   => $type,
+                        'compare' => 'LIKE'
+                      ),
+                  )
+                      //do the published option and consider sorting
+                    );
+                    // query
+                    $the_query = new WP_Query( $args );
+                    if( $the_query->have_posts() ): 
+                      while ( $the_query->have_posts() ) : $the_query->the_post(); 
+                      $html .= '<div class="row the-faculty">';
+                      $html .= '<div class="faculty-img col-md-4">';
+                        if ( has_post_thumbnail() ) {
+                        $html .=  get_the_post_thumbnail($post->ID,'large', array('class' => 'faculty-bio-image responsive', 'alt' => 'Faculty portrait.'));
+                        }  
+                       $html .= '</div><div class="col-md-8"><h2 class="faculty-title">';
+                       $html .=  get_the_title(); the_faculty_degree();
+                       $html .= '</h2><div class="row"><div class="col-md-6 faculty-bio-content"><div class="faculty-titles">';
+                       $html .= the_faculty_title();
+                       $html .= '</div>';
+                       $html .= the_faculty_expertise();
+                       $html .= '</div><div class="col-md-6 faculty-contact-info">';
+                       $html .= the_faculty_phone();
+                       $html .= the_faculty_office();    
+                       $html .= the_faculty_email(); 
+                       $html .= the_faculty_website();
+                       $html .= the_content();
+                       $html .= the_faculty_group();
+                       $html .= '</div></div></div></div>';          
+                     endwhile;
+                  endif;
+            wp_reset_query();  // Restore global post data stomped by the_post().
+   return $html;
+}
+
+add_shortcode( 'get-faculty', 'altlab_faculty_shortcode' );
+
+//modify faculty JSON endpoint to include faculty type 
+add_action( 'rest_api_init', 'add_faculty_type_to_json' );
+function add_faculty_type_to_json() {
+
+    register_rest_field(
+        'faculty',
+        'staff_group',
+        array(
+            'get_callback'    => 'faculty_return_type',
+        )
+    );
+}
+
+// Return acf field staff_group
+function faculty_return_type( $object, $field_name, $request ) {
+    global $post;
+    $faculty_type = get_field('staff_group', $post->ID); 
+    return $faculty_type[0];
+}
+
+//allow filtering of that JSON by the new field
+
+//THIS LETS US SEARCH BY staff_group variables **********or does it
+add_filter( 'rest_faculty_query', function( $args, $request ) {
+    $staff_group   = $request->get_param( 'staff_group' );
+ 
+    if ( ! empty( $staff_group ) ) {
+        $args['staff_group'] = array(
+            array(
+                'key'     => 'staff_group',
+                'value'   => $staff_group,
+                'compare' => '===',
+            )
+        );      
+    }
+ 
+    return $args;
+}, 10, 2 );
+
+
+
+/*
+NO LONGER NEEDED BC OF FUNCTIONAL CHANGES
+
+function people_sorter(){
+  if (is_page_template('page-templates/fullwidthpage-faculty.php')){
+   return '<div id="sorting-row" class="sorting-hat bg-transparent"><button id="academic_button">ACADEMIC FACULTY</button><button id="staff_button" >STAFF</button><button id="adjunct_button">ADJUNCTS & AFFILIATES</button>
+        </div>'; 
+      }
+
+}
+*/
+
+//*****************ACF option that will automatically include these in sites with ACF active
 if( function_exists('acf_add_local_field_group') ):
 
 acf_add_local_field_group(array (
@@ -540,6 +647,49 @@ acf_add_local_field_group(array (
         'param' => 'post_type',
         'operator' => '==',
         'value' => 'faculty',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => '',
+  'active' => 1,
+  'description' => '',
+));
+
+acf_add_local_field_group(array (
+  'key' => 'group_5b2bd623ba8a6',
+  'title' => 'Publication Details',
+  'fields' => array (
+    array (
+      'key' => 'field_5b2bd6298ee60',
+      'label' => 'Citation',
+      'name' => 'citation',
+      'type' => 'wysiwyg',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'maxlength' => '',
+      'rows' => '',
+      'new_lines' => '',
+    ),
+  ),
+  'location' => array (
+    array (
+      array (
+        'param' => 'post_type',
+        'operator' => '==',
+        'value' => 'publication',
       ),
     ),
   ),

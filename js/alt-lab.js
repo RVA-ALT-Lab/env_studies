@@ -19,6 +19,9 @@ function stickyMenu() {
 }
 
 
+/*
+
+NO LONGER NEEDED BC OF DIFFERENT DESIRE FOR FACULTY STRUCTURE 
 
 var theStaffButton = document.getElementById('staff_button');
 theStaffButton.addEventListener('click', function(){peopleSorter('staff')});
@@ -50,4 +53,7 @@ function buttonStatus(level){
 	var theButton = document.getElementById(level+'_button');
 	theButton.classList.toggle('activated');
 	//NEED TO ADD SOMETHING IN HERE TO REMOVE CLASS IF EXISTS
+
+
 }
+*/

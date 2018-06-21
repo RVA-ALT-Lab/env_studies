@@ -18,9 +18,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 		<div class="row">
 
 			<div class="col-md-12 content-area" id="primary">
-				<div class="sorting-hat">
-					<button id="academic_button">ACADEMIC FACULTY</button><button id="staff_button" >STAFF</button><button id="adjunct_button">ADJUNCTS & AFFILIATES</button>
-				</div>	
+				
 				<main class="site-main" id="main" role="main">
 
 					<?php while ( have_posts() ) : the_post(); ?>
@@ -53,15 +51,15 @@ $container = get_theme_mod( 'understrap_container_type' );
 								    	<div class="row">
 										    <div class="col-md-6 faculty-bio-content">  
 										      <div class="faculty-titles"><?php the_faculty_title();?></div>
-										      <?php the_faculty_expertise();?>           
+										      <?php echo the_faculty_expertise();?>           
 										    </div>
 										    <div class="col-md-6 faculty-contact-info">
-										      <?php the_faculty_phone();?>
-										      <?php the_faculty_office();?>    
-										      <?php the_faculty_email();?> 
-										      <?php the_faculty_website();?>   
-										      <?php the_content();?>
-										      <?php the_faculty_group();?>
+										      <?php echo the_faculty_phone();?>
+										      <?php echo the_faculty_office();?>    
+										      <?php echo the_faculty_email();?> 
+										      <?php echo the_faculty_website();?>   
+										      <?php echo the_content();?>
+										      <?php echo the_faculty_group();?>
 										    </div>
 										  </div>
 										</div>  

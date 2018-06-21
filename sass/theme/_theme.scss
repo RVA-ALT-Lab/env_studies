@@ -170,9 +170,12 @@ ul {
 
 //Faculty page 
 
-.sorting-hat {
+#sorting-row {
 	display: flex;
 	justify-content: space-around;
+	margin-top: 3em;
+	background-color: transparent !important;
+	background: transparent !important;
 }
 
 .sorting-hat button {

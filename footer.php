@@ -16,7 +16,7 @@ $container = get_theme_mod( 'understrap_container_type' );
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-           <h2 class="major-section">VCU Life Sciences</h2>
+           <a href="https://lifesciences.vcu.edu/"><h2 class="major-section hvr-underline-from-center">VCU Life Sciences</h2></a>
           <div class="row">
           <div class="col-lg-4">
             <div class="card">
