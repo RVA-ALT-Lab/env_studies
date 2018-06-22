@@ -193,10 +193,6 @@ ul {
 }
 
 
-.hide {
-	display: none;
-}
-
 .sorting-hat button.activated {
 	background-color: $aqua;
 }
@@ -268,12 +264,57 @@ footer .fa:hover{
 	margin: 0 0 .7em 0;
 }
 
-
-
 .faculty-bio-content, .faculty-contact-info {
 	font-size: 1.3em;
 }
 
+
+//PUBLICATIONS
+h1.the-pub{
+	font-weight: 500;
+	font-size: 1.4em;
+	margin: 0;
+}
+
+
+#abstract-button {
+	transition: all 0.4s ease-in-out;
+	display: inline-block;
+	padding: .3em;
+	border: 1px solid $light-gray;
+	font-weight: 500;
+	font-size: 1.2em;
+}
+
+#abstract-button.active {
+	background-color: $aqua;
+}
+
+#abstract-button:hover {
+	cursor: pointer;
+	background-color: $aqua;
+}
+
+#abstract-status {
+	width: 1em;
+	display: inline-block;
+	margin-left: .2em;
+	transition: all .6s ease-in-out;		
+}
+
+*, .hide, .the-abstract, #abstract-container {
+	transition: all .6s ease-in-out;	
+}
+
+.hide {
+	opacity: 0;
+}
+
+#abstract-container {
+	border: 1px solid $light-gray;
+	padding: .5em;
+	margin: 1em 0;
+}
 
 //JUST BLOCKQUOTE
 //from https://codepen.io/iPawan/pen/emrPKP
@@ -463,3 +504,17 @@ blockquote.default{
   left: 0;
   right: 0;
 }
+
+
+/* THE LAND OF MEDIA QUERIES */
+@media (max-width: 768px) {
+	.nav-big {
+		display: none;
+	}
+ }
+
+ @media (min-width: 769px) {
+	.nav-small {
+		display: none;
+	}
+ }

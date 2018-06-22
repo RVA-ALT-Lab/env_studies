@@ -351,6 +351,58 @@ function the_faculty_group() {
 }
 
 
+//FUNCTIONS FOR PUBLICATIONS
+
+function the_pub_authors(){
+   global $post;
+   $authors = get_field( "authors", $post->ID );
+   if ($authors){
+    return '<span class="pub-authors">'.$authors.'</span>';
+   }
+}
+
+function the_pub_year(){
+   global $post;
+   $year = get_field( "publication_year", $post->ID );
+   if ($year){
+    return '<span class="pub-year">'.$year.'</span>';
+   }
+}
+
+function the_pub_title(){
+   global $post;
+   $pub_title = get_field( "publication", $post->ID );
+   if ($pub_title){
+    return '<span class="pub-title"> '.$pub_title.'</span>';
+   }
+}
+
+function the_pub_issue(){
+   global $post;
+   $pub_issue = get_field( "issue", $post->ID );
+   if ($pub_issue){
+    return '<span class="pub-issue"> '.$pub_issue.':</span>';
+   }
+}
+
+
+function the_pub_pages(){
+   global $post;
+   $pub_pages = get_field( "pages", $post->ID );
+   if ($pub_pages){
+    return '<span class="pub-pages">'.$pub_pages.'.</span>';
+   }
+}
+
+function the_pub_link(){
+   global $post;
+   $pub_link = get_field( "doi_url", $post->ID );
+   if ($pub_link){
+    return '<span class="pub-link"> <a href="'.$pub_link.'">'.$pub_link.'</a>.</span>';
+   }
+}
+
+
 //shortcode for faculty content by type
 function altlab_faculty_shortcode( $atts, $content = null ) {
     extract(shortcode_atts( array(
@@ -358,11 +410,13 @@ function altlab_faculty_shortcode( $atts, $content = null ) {
     ), $atts));     
 
     $html ='';
-
+    $type = htmlspecialchars_decode($type);
                $args = array(
                       'numberposts' => -1,
                       'post_type'   => 'faculty', 
-                      'post_status' => 'publish',                   
+                      'post_status' => 'publish', 
+                      'order_by' => 'name',  
+                      'order' => 'ASC',                
                       'meta_query' => array(
                       'relation'    => 'OR',
                       array(
@@ -443,7 +497,56 @@ add_filter( 'rest_faculty_query', function( $args, $request ) {
     return $args;
 }, 10, 2 );
 
+//shortcode for RESEARCH content by type
+function altlab_publication_shortcode( $atts, $content = null ) {
+    extract(shortcode_atts( array(
+         'type' => '',  
+    ), $atts));     
 
+    $html ='';
+    $type = htmlspecialchars_decode($type);
+               $args = array(
+                      'numberposts' => -1,
+                      'post_type'   => 'publication', 
+                      'post_status' => 'publish', 
+                      'order_by' => 'name',  
+                      'order' => 'ASC',                
+                      'meta_query' => array(
+                      'relation'    => 'OR',
+                      array(
+                        'key'   => 'author_level',
+                        'value'   => $type,
+                        'compare' => 'LIKE'
+                      ),
+                  )
+                      //do the published option and consider sorting
+                    );
+                    // query
+                    $the_query = new WP_Query( $args );
+                    if( $the_query->have_posts() ): 
+                      while ( $the_query->have_posts() ) : $the_query->the_post(); 
+                     $html .= '<div class="row the-publication-row"><div class="col-md-4">';                         
+                             if ( has_post_thumbnail() ) {
+                               $html .=  get_the_post_thumbnail($post->ID,'large', array('class' => 'publication-image responsive', 'alt' => 'Document image.'));
+                        }                         
+                       $html .= '</div><div class="col-md-8 publication-content"><h1 class="the-pub">';
+                       $html .=  the_pub_authors();
+                       $html .= the_pub_year();
+                       $html .= get_the_title(); 
+                       $html .= the_pub_title(); 
+                       $html .= the_pub_issue(); 
+                       $html .= the_pub_pages(); 
+                       $html .=the_pub_link();
+                       $html .= '</h1><h3 id="abstract-button">Abstract<span id="abstract-status"> +</span></h3><div class="the-abstract hide" id="abstract-container">';
+                       $html .= get_the_content();
+                         $html .= '</div></div></div>';                
+                     endwhile;
+                  endif;
+            wp_reset_query();  // Restore global post data stomped by the_post().
+   return $html;
+}
+
+add_shortcode( 'get-publications', 'altlab_publication_shortcode' );
 
 /*
 NO LONGER NEEDED BC OF FUNCTIONAL CHANGES
@@ -662,26 +765,143 @@ acf_add_local_field_group(array (
 
 acf_add_local_field_group(array (
   'key' => 'group_5b2bd623ba8a6',
-  'title' => 'Publication Details',
+  'title' => 'publication',
   'fields' => array (
     array (
       'key' => 'field_5b2bd6298ee60',
-      'label' => 'Citation',
-      'name' => 'citation',
-      'type' => 'wysiwyg',
+      'label' => 'Author(s)',
+      'name' => 'authors',
+      'type' => 'text',
       'instructions' => '',
       'required' => 0,
       'conditional_logic' => 0,
       'wrapper' => array (
-        'width' => '',
+        'width' => '70',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'tabs' => 'all',
+      'toolbar' => 'basic',
+      'media_upload' => 0,
+      'delay' => 0,
+    ),
+    array (
+      'key' => 'field_5b2d078f61d64',
+      'label' => 'Author level',
+      'name' => 'author_level',
+      'type' => 'checkbox',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '30',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array (
+        'Undergraduate' => 'Undergraduate',
+        'Graduate' => 'Graduate',
+      ),
+      'allow_custom' => 0,
+      'save_custom' => 0,
+      'default_value' => array (
+      ),
+      'layout' => 'vertical',
+      'toggle' => 0,
+      'return_format' => 'value',
+    ),
+    array (
+      'key' => 'field_5b2d02294c743',
+      'label' => 'Publication',
+      'name' => 'publication',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '50',
         'class' => '',
         'id' => '',
       ),
       'default_value' => '',
       'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
       'maxlength' => '',
-      'rows' => '',
-      'new_lines' => '',
+    ),
+    array (
+      'key' => 'field_5b2d0188f65ff',
+      'label' => 'Publication Year',
+      'name' => 'publication_year',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '50',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b2d05df1ddeb',
+      'label' => 'Issue',
+      'name' => 'issue',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '33',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b2d05f1fc4ec',
+      'label' => 'Pages',
+      'name' => 'pages',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '33',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b2d023e4c744',
+      'label' => 'DOI URL',
+      'name' => 'doi_url',
+      'type' => 'url',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '33',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
     ),
   ),
   'location' => array (
@@ -694,11 +914,19 @@ acf_add_local_field_group(array (
     ),
   ),
   'menu_order' => 0,
-  'position' => 'normal',
+  'position' => 'acf_after_title',
   'style' => 'default',
   'label_placement' => 'top',
   'instruction_placement' => 'label',
-  'hide_on_screen' => '',
+  'hide_on_screen' => array (
+    0 => 'discussion',
+    1 => 'comments',
+    2 => 'format',
+    3 => 'page_attributes',
+    4 => 'categories',
+    5 => 'tags',
+    6 => 'send-trackbacks',
+  ),
   'active' => 1,
   'description' => '',
 ));

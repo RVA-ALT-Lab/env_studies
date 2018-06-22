@@ -18,6 +18,32 @@ function stickyMenu() {
   }
 }
 
+//PUBLICATIONS EXPAND/HIDE Excerpt
+
+abstractMother();
+
+function abstractMother(){
+	if (document.getElementById('abstract-button')){
+		var theAbstractButton = document.getElementById('abstract-button');
+		theAbstractButton.addEventListener('click', function(){abstractModifier()});
+	}
+}
+
+function abstractModifier(){
+	var theAbstract = document.getElementById('abstract-container');
+	theAbstract.classList.toggle('hide');
+
+	var theAbstractButton = document.getElementById('abstract-button');
+	theAbstractButton.classList.toggle('active');	
+  
+  var theAbstractState = document.getElementById('abstract-status');
+  if (theAbstractState.innerHTML === ' +'){
+        theAbstractState.innerHTML = ' -';
+  } else {
+    theAbstractState.innerHTML = ' +';
+  }
+}
+
 
 /*
 
