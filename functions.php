@@ -215,7 +215,7 @@ add_action( 'init', 'create_faculty_cpt', 0 );
 //publication custom post type
 
 // Register Custom Post Type publication
-// Post Type Key: faculty
+// Post Type Key: publication
 function create_publication_cpt() {
 
   $labels = array(

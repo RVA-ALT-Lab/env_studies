@@ -20,7 +20,7 @@ $container = get_theme_mod( 'understrap_container_type' );
           <div class="row">
           <div class="col-lg-4">
             <div class="card">
-              <img class="card-img-top" src="<?php echo THEME_IMG_PATH; ?>bio-complexity.jpg" alt="Card image cap">
+              <img class="card-img-top" src="<?php echo THEME_IMG_PATH; ?>bio-complexity.jpg" alt="">
               <a href="#">
                 <div class="card-body hvr-underline-from-center">
                   <h3 class="card-title">
