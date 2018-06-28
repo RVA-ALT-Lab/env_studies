@@ -12,6 +12,19 @@ $container = get_theme_mod( 'understrap_container_type' );
 ?>
 
 <?php get_sidebar( 'footerfull' ); ?>
+<div class="container">
+  <div class="row row-eq-height custom-zone">
+      <div class="custom-widget col-md-4">
+        <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Left") ) : ?><?php endif;?>
+      </div>
+      <div class="custom-widget col-md-4">
+        <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Center") ) : ?><?php endif;?>
+      </div>
+      <div class="custom-widget col-md-4">
+        <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Right") ) : ?><?php endif;?>
+      </div>
+  </div>
+</div>
    <div class="jumbotron water">   
     <div class="container">
       <div class="row">
