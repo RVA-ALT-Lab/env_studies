@@ -66,15 +66,10 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 		<div class="row" id="footer">
 
-
-							<div class="footer-widget col-md-3">
-								<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer - far left") ) : ?><?php endif;?>
-							</div>
-							<div class="footer-widget col-md-3">
-								<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer - medium left") ) : ?><?php endif;?>
-							</div>
-							<div class="footer-widget col-md-3">
-								<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer - medium right") ) : ?><?php endif;?>
+							<div class="footer-widget col-md-9">
+								<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer - far left one") ) : ?><?php endif;?>
+                <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer - far left two") ) : ?><?php endif;?>
+                <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer - far left three") ) : ?><?php endif;?>
 							</div>
 							<div class="footer-widget col-md-3">
 								<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer - far right") ) : ?><?php endif;?>

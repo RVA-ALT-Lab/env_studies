@@ -23,9 +23,12 @@ function stickyMenu() {
 abstractMother();
 
 function abstractMother(){
-	if (document.getElementById('abstract-button')){
-		var theAbstractButton = document.getElementById('abstract-button');
-		theAbstractButton.addEventListener('click', function(){abstractModifier()});
+	if (document.getElementsByClassName('abstract-button')){
+		var buttons = document.getElementsByClassName('abstract-button');
+		for (var i = 0; i < buttons.length; i++) {
+			var theAbstractButton = buttons.item(i);
+			theAbstractButton.addEventListener('click', function(){abstractModifier()});
+		}
 	}
 }
 
@@ -43,6 +46,12 @@ function abstractModifier(){
     theAbstractState.innerHTML = ' +';
   }
 }
+
+
+//hide additional privacy notice 
+var private = document.getElementById('private');
+private.display = 'none';
+
 
 
 /*

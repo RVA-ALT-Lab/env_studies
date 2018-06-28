@@ -75,7 +75,7 @@ body, p {
 }
 
 p {
-	background-color: $white;
+	//background-color: $white;
 	line-height: 1.5em;
 	//padding: 1em .4em;
 }
@@ -277,40 +277,34 @@ h1.the-pub{
 }
 
 
-#abstract-button {
+.abstract-button {
 	transition: all 0.4s ease-in-out;
 	display: inline-block;
 	padding: .3em;
 	border: 1px solid $light-gray;
 	font-weight: 500;
 	font-size: 1.2em;
+	margin: .5em 0;
 }
 
-#abstract-button.active {
+.abstract-button.active {
 	background-color: $aqua;
 }
 
-#abstract-button:hover {
+.abstract-button:hover {
 	cursor: pointer;
 	background-color: $aqua;
 }
 
-#abstract-status {
+.abstract-status {
 	width: 1em;
 	display: inline-block;
 	margin-left: .2em;
 	transition: all .6s ease-in-out;		
 }
 
-*, .hide, .the-abstract, #abstract-container {
-	transition: all .6s ease-in-out;	
-}
 
-.hide {
-	opacity: 0;
-}
-
-#abstract-container {
+.abstract-container {
 	border: 1px solid $light-gray;
 	padding: .5em;
 	margin: 1em 0;

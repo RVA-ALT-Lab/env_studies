@@ -89,7 +89,7 @@ function alt_lab_scripts() {
 //add footer widget areas
 if ( function_exists('register_sidebar') )
   register_sidebar(array(
-    'name' => 'Footer - far left',
+    'name' => 'Footer - far left one',
     'before_widget' => '<div class = "widgetizedArea">',
     'after_widget' => '</div>',
     'before_title' => '<h3>',
@@ -99,7 +99,7 @@ if ( function_exists('register_sidebar') )
 
 if ( function_exists('register_sidebar') )
   register_sidebar(array(
-    'name' => 'Footer - medium left',
+    'name' => 'Footer - far left two',
     'before_widget' => '<div class = "widgetizedArea">',
     'after_widget' => '</div>',
     'before_title' => '<h3>',
@@ -110,7 +110,7 @@ if ( function_exists('register_sidebar') )
 
 if ( function_exists('register_sidebar') )
   register_sidebar(array(
-    'name' => 'Footer - medium right',
+    'name' => 'Footer - far left three',
     'before_widget' => '<div class = "widgetizedArea">',
     'after_widget' => '</div>',
     'before_title' => '<h3>',
@@ -361,11 +361,28 @@ function the_pub_authors(){
    }
 }
 
+function the_pub_author_level(){
+   global $post;
+   $level = get_field( "author_level", $post->ID );
+   if ($level){
+    return strtolower($level);
+   }
+}
+
+
 function the_pub_year(){
    global $post;
    $year = get_field( "publication_year", $post->ID );
    if ($year){
     return '<span class="pub-year">'.$year.'</span>';
+   }
+}
+
+function the_pub_year_class(){
+   global $post;
+   $year = get_field( "publication_year", $post->ID );
+   if ($year){
+    return $year;
    }
 }
 
@@ -500,24 +517,30 @@ add_filter( 'rest_faculty_query', function( $args, $request ) {
 //shortcode for RESEARCH content by type
 function altlab_publication_shortcode( $atts, $content = null ) {
     extract(shortcode_atts( array(
-         'type' => '',  
+         'year' => '',  
     ), $atts));     
-
+    if ($year){
+      $year; 
+      $compare = '=';   
+    } else {
+      $year = '1';    
+      $compare = '>';
+    }
     $html ='';
     $type = htmlspecialchars_decode($type);
                $args = array(
                       'numberposts' => -1,
                       'post_type'   => 'publication', 
                       'post_status' => 'publish', 
-                      'order_by' => 'name',  
-                      'order' => 'ASC',                
+                      'meta_key' => 'publication_year',
+                      'orderby' => 'meta_value_num',                
                       'meta_query' => array(
                       'relation'    => 'OR',
                       array(
-                        'key'   => 'author_level',
-                        'value'   => $type,
-                        'compare' => 'LIKE'
-                      ),
+                        'key'   => 'publication_year',
+                        'value'   => $year,
+                        'compare' => $compare
+                      ),                     
                   )
                       //do the published option and consider sorting
                     );
@@ -525,19 +548,19 @@ function altlab_publication_shortcode( $atts, $content = null ) {
                     $the_query = new WP_Query( $args );
                     if( $the_query->have_posts() ): 
                       while ( $the_query->have_posts() ) : $the_query->the_post(); 
-                     $html .= '<div class="row the-publication-row"><div class="col-md-4">';                         
+                     $html .= '<div class="row the-publication-row year-'.the_pub_year_class().' ' . the_pub_author_level() . '"><div class="col-md-4">';                         
                              if ( has_post_thumbnail() ) {
                                $html .=  get_the_post_thumbnail($post->ID,'large', array('class' => 'publication-image responsive', 'alt' => 'Document image.'));
                         }                         
                        $html .= '</div><div class="col-md-8 publication-content"><h1 class="the-pub">';
-                       $html .=  the_pub_authors();
+                       $html .= the_pub_authors();
                        $html .= the_pub_year();
                        $html .= get_the_title(); 
                        $html .= the_pub_title(); 
                        $html .= the_pub_issue(); 
                        $html .= the_pub_pages(); 
-                       $html .=the_pub_link();
-                       $html .= '</h1><h3 id="abstract-button">Abstract<span id="abstract-status"> +</span></h3><div class="the-abstract hide" id="abstract-container">';
+                       $html .= the_pub_link();                     
+                       $html .= '</h1><button data-toggle="collapse" data-target="#post-' . get_the_ID(). '" class="abstract-button">Abstract</button><div class="the-abstract abstract-container collapse" id="post-' . get_the_ID(). '">';
                        $html .= get_the_content();
                          $html .= '</div></div></div>';                
                      endwhile;
@@ -547,6 +570,60 @@ function altlab_publication_shortcode( $atts, $content = null ) {
 }
 
 add_shortcode( 'get-publications', 'altlab_publication_shortcode' );
+
+
+//shortcode for content by category
+function altlab_content_shortcode( $atts, $content = null ) {
+    extract(shortcode_atts( array(
+         'cat' => '',  
+         'num' => '',
+         'ex' => ''
+    ), $atts));     
+
+    if (!$num){
+      $num = 3;
+    } 
+
+    if (!$ex){
+      $ex = false;
+    }
+    $html ='';
+    $num = intval($num);    
+   
+               $args = array(
+                      'posts_per_page' => $num,
+                      'post_type'   => 'post', 
+                      'post_status' => 'publish', 
+                      'order_by' => 'date',  
+                      'category_name' => $cat,
+                      'nopaging' => false,                                        
+                    );
+               
+                    // query
+                    $the_query = new WP_Query( $args );
+                    if( $the_query->have_posts() ): 
+                      while ( $the_query->have_posts() ) : $the_query->the_post(); 
+                      $html .= '<div class="row sc-posts">';
+                      $html .= '<div class="sc-post-img col-md-12">';
+                        if ( has_post_thumbnail() ) {
+                        $html .=  get_the_post_thumbnail($post->ID,'medium', array('class' => 'sc-post-image responsive aligncenter', 'alt' => 'Featured image.'));
+                        }  
+                       $html .= '</div><h3 class="sc-post-title">';
+                       $html .=  get_the_title();
+                       $html .= '</h3>';  
+                       if ($ex){                  
+                        $html .= '<div class="row"><div class="sc-post-content">' .get_the_excerpt() . '</div>';
+                      }
+                       $html .= '</div></div>';          
+                     endwhile;
+                  endif;
+            wp_reset_query();  // Restore global post data stomped by the_post().
+   return $html;
+}
+
+add_shortcode( 'get-posts', 'altlab_content_shortcode' );
+
+
 
 /*
 NO LONGER NEEDED BC OF FUNCTIONAL CHANGES
@@ -559,6 +636,9 @@ function people_sorter(){
 
 }
 */
+
+
+
 
 //*****************ACF option that will automatically include these in sites with ACF active
 if( function_exists('acf_add_local_field_group') ):
@@ -790,7 +870,7 @@ acf_add_local_field_group(array (
       'key' => 'field_5b2d078f61d64',
       'label' => 'Author level',
       'name' => 'author_level',
-      'type' => 'checkbox',
+      'type' => 'select',
       'instructions' => '',
       'required' => 0,
       'conditional_logic' => 0,
@@ -851,7 +931,7 @@ acf_add_local_field_group(array (
     ),
     array (
       'key' => 'field_5b2d05df1ddeb',
-      'label' => 'Issue',
+      'label' => 'Volume',
       'name' => 'issue',
       'type' => 'text',
       'instructions' => '',
@@ -939,3 +1019,4 @@ if ( is_wp_error( $result ) ) {
   // Process Error
 }
 */
+ 
