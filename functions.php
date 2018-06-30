@@ -76,10 +76,16 @@ require get_template_directory() . '/inc/editor.php';
 require get_template_directory() . '/inc/custom-widgets.php';
 
 /**
- * Load ACF functions.
+ * Load widget functions.
  */
-require get_template_directory() . '/inc/acf-specific.php';
+require get_template_directory() . '/inc/custom-post-types.php';
 
+
+//set a path for IMGS
+
+  if( !defined('THEME_IMG_PATH')){
+   define( 'THEME_IMG_PATH', get_stylesheet_directory_uri() . '/imgs/' );
+  }
 
 //ADD FONTS and VCU Brand Bar
 add_action('wp_enqueue_scripts', 'alt_lab_scripts');
@@ -95,13 +101,6 @@ function alt_lab_scripts() {
 	wp_enqueue_script( 'alt_lab_js', get_template_directory_uri() . '/js/alt-lab.js', array(), '1.1.1', true );
 
     }
-
-
-//set a path for IMGS
-
-  if( !defined(THEME_IMG_PATH)){
-   define( 'THEME_IMG_PATH', get_stylesheet_directory_uri() . '/imgs/' );
-  }
 
 
 function bannerMaker(){
@@ -205,7 +204,7 @@ function the_pub_author_level(){
    global $post;
    $level = get_field( "author_level", $post->ID );
    if ($level){
-    return strtolower($level);
+    return strtolower($level[0]);
    }
 }
 
@@ -269,10 +268,11 @@ function altlab_faculty_shortcode( $atts, $content = null ) {
     $html ='';
     $type = htmlspecialchars_decode($type);
                $args = array(
-                      'numberposts' => -1,
+                      'posts_per_page' => -1,
                       'post_type'   => 'faculty', 
                       'post_status' => 'publish', 
-                      'order_by' => 'name',  
+                      'order_by' => 'name', 
+                      'nopaging' => false,                                         
                       'order' => 'ASC',                
                       'meta_query' => array(
                       'relation'    => 'OR',
@@ -357,7 +357,8 @@ add_filter( 'rest_faculty_query', function( $args, $request ) {
 //shortcode for RESEARCH content by type
 function altlab_publication_shortcode( $atts, $content = null ) {
     extract(shortcode_atts( array(
-         'year' => '',  
+         'year' => '', 
+         'type' => '', 
     ), $atts));     
     if ($year){
       $year; 
@@ -367,12 +368,15 @@ function altlab_publication_shortcode( $atts, $content = null ) {
       $compare = '>';
     }
     $html ='';
-    $type = htmlspecialchars_decode($type);
+    if($type){
+       $type = htmlspecialchars_decode($type);
+    }
                $args = array(
-                      'numberposts' => -1,
+                      'posts_per_page' => -1,
                       'post_type'   => 'publication', 
                       'post_status' => 'publish', 
                       'meta_key' => 'publication_year',
+                      //'nopaging' => false,                                        
                       'orderby' => 'meta_value_num',                
                       'meta_query' => array(
                       'relation'    => 'OR',
@@ -390,7 +394,7 @@ function altlab_publication_shortcode( $atts, $content = null ) {
                       while ( $the_query->have_posts() ) : $the_query->the_post(); 
                      $html .= '<div class="row the-publication-row year-'.the_pub_year_class().' ' . the_pub_author_level() . '"><div class="col-md-4">';                         
                              if ( has_post_thumbnail() ) {
-                               $html .=  get_the_post_thumbnail($post->ID,'large', array('class' => 'publication-image responsive', 'alt' => 'Document image.'));
+                               $html .=  get_the_post_thumbnail(get_the_ID(),'large', array('class' => 'publication-image responsive', 'alt' => 'Document image.'));
                         }                         
                        $html .= '</div><div class="col-md-8 publication-content"><h1 class="the-pub">';
                        $html .= the_pub_authors();
