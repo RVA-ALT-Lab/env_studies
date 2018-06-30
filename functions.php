@@ -489,9 +489,6 @@ function people_sorter(){
 */
 
 
-
-
-
 // Register and load the widget
 function news_load_widget() {
     register_widget( 'news_widget' );
@@ -557,3 +554,384 @@ return $instance;
 
 
 
+
+//*****************ACF option that will automatically include these in sites with ACF active
+if( function_exists('acf_add_local_field_group') ):
+
+acf_add_local_field_group(array (
+  'key' => 'group_5b290ff211e39',
+  'title' => 'faculty details',
+  'fields' => array (
+    array (
+      'key' => 'field_5b290ff8b299b',
+      'label' => 'Degree',
+      'name' => 'degree',
+      'type' => 'checkbox',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array (
+        'Ph.D.' => 'Ph.D.',
+        'M.S.' => 'M.S.',
+        'M.Ed.' => 'M.Ed.',
+        'J.D.' => 'J.D.',
+      ),
+      'allow_custom' => 0,
+      'save_custom' => 0,
+      'default_value' => array (
+      ),
+      'layout' => 'vertical',
+      'toggle' => 0,
+      'return_format' => 'value',
+    ),
+    array (
+      'key' => 'field_5b29104bb299c',
+      'label' => 'Title',
+      'name' => 'title',
+      'type' => 'checkbox',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array (
+        'Academic Advisor' => 'Academic Advisor',
+        'Adjunct Instructor' => 'Adjunct Instructor',
+        'Assistant Director' => 'Assistant Director',
+        'Associate Professor' => 'Associate Professor',
+        'Assistant Professor' => 'Assistant Professor',
+        'Director' => 'Director',
+        'Full Professor' => 'Full Professor',
+        'Graduate Program Director' => 'Graduate Program Director',
+        'Instructor' => 'Instructor',
+      ),
+      'allow_custom' => 0,
+      'save_custom' => 0,
+      'default_value' => array (
+      ),
+      'layout' => 'vertical',
+      'toggle' => 0,
+      'return_format' => 'value',
+    ),
+    array (
+      'key' => 'field_5b29104bb299c991',
+      'label' => 'Staff Group',
+      'name' => 'staff_group',
+      'type' => 'checkbox',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array (
+        'Academic Faculty' => 'Academic Faculty',
+        'Staff' => 'Staff',
+        'Adjuncts & Affiliates' => 'Adjuncts & Affiliates',       
+      ),
+      'allow_custom' => 0,
+      'save_custom' => 0,
+      'default_value' => array (
+      ),
+      'layout' => 'vertical',
+      'toggle' => 0,
+      'return_format' => 'value',
+    ),
+    array (
+      'key' => 'field_5b2910dd36a77',
+      'label' => 'Area of Expertise',
+      'name' => 'area_of_expertise',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b2910f6169d6',
+      'label' => 'Office Location',
+      'name' => 'office_location',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b291100cbdb3',
+      'label' => 'Phone Number',
+      'name' => 'phone_number',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b29111bb948a',
+      'label' => 'Email Address',
+      'name' => 'email_address',
+      'type' => 'email',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+    ),
+    array (
+      'key' => 'field_5b29112bf8a27',
+      'label' => 'Website',
+      'name' => 'website',
+      'type' => 'url',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+    ),
+  ),
+  'location' => array (
+    array (
+      array (
+        'param' => 'post_type',
+        'operator' => '==',
+        'value' => 'faculty',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => '',
+  'active' => 1,
+  'description' => '',
+));
+
+acf_add_local_field_group(array (
+  'key' => 'group_5b2bd623ba8a6',
+  'title' => 'publication',
+  'fields' => array (
+    array (
+      'key' => 'field_5b2bd6298ee60',
+      'label' => 'Author(s)',
+      'name' => 'authors',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '70',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'tabs' => 'all',
+      'toolbar' => 'basic',
+      'media_upload' => 0,
+      'delay' => 0,
+    ),
+    array (
+      'key' => 'field_5b2d078f61d64',
+      'label' => 'Author level',
+      'name' => 'author_level',
+      'type' => 'select',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '30',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array (
+        'Undergraduate' => 'Undergraduate',
+        'Graduate' => 'Graduate',
+      ),
+      'allow_custom' => 0,
+      'save_custom' => 0,
+      'default_value' => array (
+      ),
+      'layout' => 'vertical',
+      'toggle' => 0,
+      'return_format' => 'value',
+    ),
+    array (
+      'key' => 'field_5b2d02294c743',
+      'label' => 'Publication',
+      'name' => 'publication',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '50',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b2d0188f65ff',
+      'label' => 'Publication Year',
+      'name' => 'publication_year',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '50',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b2d05df1ddeb',
+      'label' => 'Volume',
+      'name' => 'issue',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '33',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b2d05f1fc4ec',
+      'label' => 'Pages',
+      'name' => 'pages',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '33',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array (
+      'key' => 'field_5b2d023e4c744',
+      'label' => 'DOI URL',
+      'name' => 'doi_url',
+      'type' => 'url',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array (
+        'width' => '33',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+    ),
+  ),
+  'location' => array (
+    array (
+      array (
+        'param' => 'post_type',
+        'operator' => '==',
+        'value' => 'publication',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'acf_after_title',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => array (
+    0 => 'discussion',
+    1 => 'comments',
+    2 => 'format',
+    3 => 'page_attributes',
+    4 => 'categories',
+    5 => 'tags',
+    6 => 'send-trackbacks',
+  ),
+  'active' => 1,
+  'description' => '',
+));
+
+endif;
+
+/*/attempt to auto activate ACF Pro
+$result = activate_plugin('advanced-custom-fields-pro/acf.php' );
+if ( is_wp_error( $result ) ) {
+  // Process Error
+}
+*/
+ 
