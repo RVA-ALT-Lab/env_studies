@@ -272,7 +272,6 @@ function altlab_faculty_shortcode( $atts, $content = null ) {
                       'post_type'   => 'faculty', 
                       'post_status' => 'publish', 
                       'order_by' => 'name', 
-                      'nopaging' => false,                                         
                       'order' => 'ASC',                
                       'meta_query' => array(
                       'relation'    => 'OR',
@@ -291,7 +290,7 @@ function altlab_faculty_shortcode( $atts, $content = null ) {
                       $html .= '<div class="row the-faculty">';
                       $html .= '<div class="faculty-img col-md-4">';
                         if ( has_post_thumbnail() ) {
-                        $html .=  get_the_post_thumbnail($post->ID,'large', array('class' => 'faculty-bio-image responsive', 'alt' => 'Faculty portrait.'));
+                        $html .=  get_the_post_thumbnail(get_the_ID(),'large', array('class' => 'faculty-bio-image responsive', 'alt' => 'Faculty portrait.'));
                         }  
                        $html .= '</div><div class="col-md-8"><h2 class="faculty-title">';
                        $html .=  get_the_title(); the_faculty_degree();
@@ -305,7 +304,7 @@ function altlab_faculty_shortcode( $atts, $content = null ) {
                        $html .= the_faculty_email(); 
                        $html .= the_faculty_website();
                        $html .= the_content();
-                       $html .= the_faculty_group();
+                       //$html .= the_faculty_group();
                        $html .= '</div></div></div></div>';          
                      endwhile;
                   endif;
@@ -460,7 +459,7 @@ function altlab_content_shortcode( $atts, $content = null ) {
                       $html .= '<div class="row sc-posts">';
                       $html .= '<div class="sc-post-img col-md-12">';
                         if ( has_post_thumbnail() ) {
-                        $html .=  get_the_post_thumbnail($post->ID,'medium', array('class' => 'sc-post-image responsive aligncenter', 'alt' => 'Featured image.'));
+                        $html .=  get_the_post_thumbnail(get_the_ID(),'medium', array('class' => 'sc-post-image responsive aligncenter', 'alt' => 'Featured image.'));
                         }  
                        $html .= '</div><a href="'.get_post_permalink().'"><h3 class="sc-post-title">';
                        $html .=  get_the_title();
