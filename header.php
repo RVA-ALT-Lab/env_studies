@@ -77,6 +77,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 			<?php if ( 'container' == $container ) : ?>
 			</div><!-- .container -->
 			<?php endif; ?>
+			<?php get_search_form();?>	
 
 		</nav><!-- .site-navigation -->
 
