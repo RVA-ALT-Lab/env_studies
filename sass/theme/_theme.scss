@@ -189,7 +189,7 @@ ul {
 	background: transparent !important;
 }
 
-.sorting-hat button {
+.sorting-hat button{
 	width: 250px;
 	background-color: $white;
 	border: 1px solid $aqua;
@@ -220,6 +220,22 @@ ul {
 	font-size: 1.2em;
 	font-weight: 300;
 }
+
+//content shortcode
+.content-button {
+	width: 220px;
+	border: 1px solid $dark-gray;
+	padding: 5px;
+	text-align: center;
+	cursor: pointer;
+	display: inline-block;
+	margin: 0 auto; 
+}
+
+.content-button:hover {
+	background-color: $aqua;
+}
+
 
 //FOOTER 
 #wrapper-footer {

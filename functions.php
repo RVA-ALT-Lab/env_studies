@@ -500,7 +500,7 @@ function altlab_content_shortcode( $atts, $content = null ) {
                       }
                        $html .= '</div>';          
                      endwhile;
-                     $html .= '<a href="'.$cat_link.'"><button>See More '. $cat_name .'</button></a>';
+                     $html .= '<a class="content-button" href="'.$cat_link.'">See More '. $cat_name .'</a>';
                   endif;
             wp_reset_query();  // Restore global post data stomped by the_post().
    return $html;
