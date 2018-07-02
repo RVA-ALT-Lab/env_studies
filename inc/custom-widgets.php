@@ -102,7 +102,7 @@ function __construct() {
   'bio_complex_widget', 
    
   // Widget name will appear in UI
-  __('Bio Complexity', 'bio_complex_widget_domain'), 
+  __('VCU Bio Complexity', 'bio_complex_widget_domain'), 
    
   // Widget description
   array( 'description' => __( 'Add bio complexity box ', 'wpb_widget_domain' ), ) 
@@ -123,31 +123,8 @@ $bio_complex = '<div class="col-lg-4"><div class="card"><img class="card-img-top
       echo __( $bio_complex, 'bio_complex_widget_domain' );
     }
            
-  // Widget Backend 
-  public function form( $instance ) {
-    if ( isset( $instance[ 'title' ] ) ) {
-      $title = $instance[ 'title' ];
-    }
-  else {
-    $title = __( 'New title', 'bio_complex_widget_domain' );
-  }
-// Widget admin form
-?>
-<p>
-<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-</p>
-<?php 
-}
-     
-// Updating widget replacing old instances with new
-public function update( $new_instance, $old_instance ) {
-  $instance = array();
-  $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-  return $instance;
-  }
-} // Class ${1:this}_widget ends here
 
+} // Class ${1:this}_widget ends here
 
 
 
@@ -171,7 +148,7 @@ function __construct() {
   'rice_rivers_widget', 
    
   // Widget name will appear in UI
-  __('Rice Rivers', 'rice_rivers_widget_domain'), 
+  __('VCU Rice Rivers', 'rice_rivers_widget_domain'), 
    
   // Widget description
   array( 'description' => __( 'Add rice rivers box ', 'wpb_widget_domain' ), ) 
@@ -192,29 +169,6 @@ $rice_rivers = '<div class="col-lg-4"><div class="card"><img class="card-img-top
       echo __( $rice_rivers, 'rice_rivers_widget_domain' );
     }
            
-  // Widget Backend 
-  public function form( $instance ) {
-    if ( isset( $instance[ 'title' ] ) ) {
-      $title = $instance[ 'title' ];
-    }
-  else {
-    $title = __( 'New title', 'rice_rivers_widget_domain' );
-  }
-// Widget admin form
-?>
-<p>
-<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-</p>
-<?php 
-}
-     
-// Updating widget replacing old instances with new
-public function update( $new_instance, $old_instance ) {
-  $instance = array();
-  $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-  return $instance;
-  }
 } // Class ${1:this}_widget ends here
 
 
@@ -239,7 +193,7 @@ function __construct() {
   'life_sci_widget', 
    
   // Widget name will appear in UI
-  __('Life Science', 'life_sci_widget_domain'), 
+  __('VCU Life Science', 'life_sci_widget_domain'), 
    
   // Widget description
   array( 'description' => __( 'Add Life Sci box ', 'wpb_widget_domain' ), ) 
@@ -260,28 +214,5 @@ $life_sci = '<div class="col-lg-4"><div class="card"><img class="card-img-top" s
       echo __( $life_sci, 'life_sci_widget_domain' );
     }
            
-  // Widget Backend 
-  public function form( $instance ) {
-    if ( isset( $instance[ 'title' ] ) ) {
-      $title = $instance[ 'title' ];
-    }
-  else {
-    $title = __( 'New title', 'life_sci_widget_domain' );
-  }
-// Widget admin form
-?>
-<p>
-<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-</p>
-<?php 
-}
-     
-// Updating widget replacing old instances with new
-public function update( $new_instance, $old_instance ) {
-  $instance = array();
-  $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-  return $instance;
-  }
 } // Class ${1:this}_widget ends here
 
