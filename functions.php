@@ -271,7 +271,7 @@ function altlab_faculty_shortcode( $atts, $content = null ) {
                       'posts_per_page' => -1,
                       'post_type'   => 'faculty', 
                       'post_status' => 'publish', 
-                      'order_by' => 'name', 
+                      'orderby' => 'name', 
                       'order' => 'ASC',                
                       'meta_query' => array(
                       'relation'    => 'OR',
@@ -447,7 +447,7 @@ function altlab_content_shortcode( $atts, $content = null ) {
                       'posts_per_page' => $num,
                       'post_type'   => 'post', 
                       'post_status' => 'publish', 
-                      'order_by' => 'date',  
+                      'orderby' => 'date',  
                       'category_name' => $cat,
                       'nopaging' => false,                                        
                     );
