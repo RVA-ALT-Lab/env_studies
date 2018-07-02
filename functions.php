@@ -370,12 +370,15 @@ function altlab_publication_shortcode( $atts, $content = null ) {
     if($type){
        $type = htmlspecialchars_decode($type);
     }
+              $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1; 
+
                $args = array(
-                      'posts_per_page' => -1,
+                      'posts_per_page' => 10,
+                      'paged' => $paged,
                       'post_type'   => 'publication', 
+                      'nopaging' => false,
                       'post_status' => 'publish', 
-                      'meta_key' => 'publication_year',
-                      //'nopaging' => false,                                        
+                      'meta_key' => 'publication_year',                                                         
                       'orderby' => 'meta_value_num',                
                       'meta_query' => array(
                       'relation'    => 'OR',
@@ -388,9 +391,9 @@ function altlab_publication_shortcode( $atts, $content = null ) {
                       //do the published option and consider sorting
                     );
                     // query
-                    $the_query = new WP_Query( $args );
-                    if( $the_query->have_posts() ): 
-                      while ( $the_query->have_posts() ) : $the_query->the_post(); 
+                    $the_pub_query = new WP_Query( $args );
+                    if( $the_pub_query->have_posts() ): 
+                      while ( $the_pub_query->have_posts() ) : $the_pub_query->the_post(); 
                      $html .= '<div class="row the-publication-row year-'.the_pub_year_class().' ' . the_pub_author_level() . '"><div class="col-md-4">';                         
                              if ( has_post_thumbnail() ) {
                                $html .=  get_the_post_thumbnail(get_the_ID(),'large', array('class' => 'publication-image responsive', 'alt' => 'Document image.'));
@@ -407,12 +410,40 @@ function altlab_publication_shortcode( $atts, $content = null ) {
                        $html .= get_the_content();
                          $html .= '</div></div></div>';                
                      endwhile;
+                         $html .= pagination( $paged, $the_pub_query->max_num_pages);
                   endif;
+                  
             wp_reset_query();  // Restore global post data stomped by the_post().
    return $html;
 }
 
 add_shortcode( 'get-publications', 'altlab_publication_shortcode' );
+
+
+//PAGINATION ADDITION FROM STACKOVERFLOW https://wordpress.stackexchange.com/questions/154360/pagination-custom-query
+if ( ! function_exists( 'pagination' ) ) :
+    function pagination( $paged = '', $max_page = '' )
+    {
+        $big = 999999999; // need an unlikely integer
+        if( ! $paged )
+            $paged = get_query_var('paged');
+        if( ! $max_page )
+            $max_page = $wp_query->max_num_pages;
+
+        return paginate_links( array(
+            'base'       => str_replace($big, '%#%', esc_url(get_pagenum_link( $big ))),
+            'format'     => '?paged=%#%',
+            'current'    => max( 1, $paged ),
+            'total'      => $max_page,
+            'mid_size'   => 1,
+            'prev_text'  => __('«'),
+            'next_text'  => __('»'),
+            'type'       => 'list'
+        ) );
+    }
+endif;
+
+
 
 
 //shortcode for content by category
@@ -490,72 +521,6 @@ function people_sorter(){
 
 }
 */
-
-
-// Register and load the widget
-function news_load_widget() {
-    register_widget( 'news_widget' );
-}
-add_action( 'widgets_init', 'news_load_widget' );
- 
-// Creating the widget 
-class news_widget extends WP_Widget {
- 
-function __construct() {
-parent::__construct(
- 
-// Base ID of your widget
-'news_widget', 
- 
-// Widget name will appear in UI
-__('News Widget', 'news_widget_domain'), 
- 
-// Widget description
-array( 'description' => __( 'This will put a :) ', 'wpb_widget_domain' ), ) 
-);
-}
- 
-// Creating widget front-end
- 
-public function widget( $args, $instance ) {
-$title = apply_filters( 'widget_title', $instance['title'] );
- 
-// before and after widget arguments are defined by themes
-echo $args['before_widget'];
-if ( ! empty( $title ) )
-echo $args['before_title'] . $title . $args['after_title'];
- 
-// This is where you run the code and display the output
-echo __( '<div class="col-md-3" style="width: 80px; height: 80px">:)</div>', 'news_widget_domain' );
-echo $args['after_widget'];
-}
-         
-// Widget Backend 
-public function form( $instance ) {
-if ( isset( $instance[ 'title' ] ) ) {
-$title = $instance[ 'title' ];
-}
-else {
-$title = __( 'New title', 'news_widget_domain' );
-}
-// Widget admin form
-?>
-<p>
-<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-</p>
-<?php 
-}
-     
-// Updating widget replacing old instances with new
-public function update( $new_instance, $old_instance ) {
-$instance = array();
-$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-return $instance;
-}
-} // Class ${1:this}_widget ends here
-
-
 
 
 //*****************ACF option that will automatically include these in sites with ACF active

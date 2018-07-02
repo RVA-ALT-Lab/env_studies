@@ -283,6 +283,12 @@ footer .fa:hover{
 
 
 //PUBLICATIONS
+
+.the-publication-row {
+	margin: 2em 0;
+	border-bottom: 1px solid $aqua;
+}
+
 h1.the-pub{
 	font-weight: 500;
 	font-size: 1.4em;
@@ -322,6 +328,44 @@ h1.the-pub{
 	padding: .5em;
 	margin: 1em 0;
 }
+
+ul.page-numbers {
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid $light-gray;
+    width: 100%;    
+}
+
+.page-numbers li {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	border: 0px;
+	padding: 5px;
+	margin-right: 10px;
+	text-align: center;
+	line-height: 1em;
+	padding-top: .5em;
+}
+
+.page-numbers li a:hover{
+	background-color: $light-gray;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+
+//CLEANSING POST META AND NAVIGATION
+.post-navigation, .type-post .entry-meta {
+	display: none;
+}
+
+
+
 
 //JUST BLOCKQUOTE
 //from https://codepen.io/iPawan/pen/emrPKP
