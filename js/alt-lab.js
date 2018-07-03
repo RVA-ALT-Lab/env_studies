@@ -48,10 +48,6 @@ function abstractModifier(){
 }
 
 
-//hide additional privacy notice 
-var private = document.getElementById('private');
-private.display = 'none';
-
 
 
 /*
