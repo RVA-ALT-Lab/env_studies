@@ -82,7 +82,7 @@ if ( function_exists('register_sidebar') )
 );
 
 
-
+//bio complexity ____________________________________________
 
 // Register and load the widget
 function bio_complex_load_widget() {
@@ -128,7 +128,7 @@ $bio_complex = '<div class="col-lg-4"><div class="card"><img class="card-img-top
 
 
 
-//RICE RIVERS
+//RICE RIVERS____________________________________________
 
 // Register and load the widget
 function rice_rivers_load_widget() {
@@ -173,7 +173,7 @@ $rice_rivers = '<div class="col-lg-4"><div class="card"><img class="card-img-top
 
 
 
-//center for life science education 
+//center for life science education____________________________________________ 
 
 // Register and load the widget
 function life_sci_load_widget() {
@@ -215,4 +215,50 @@ $life_sci = '<div class="col-lg-4"><div class="card"><img class="card-img-top" s
     }
            
 } // Class ${1:this}_widget ends here
+
+
+
+//CENTER FOR ENV STUDIES____________________________________________
+
+// Register and load the widget
+function env_studies_load_widget() {
+    register_widget( 'env_studies_widget' );
+}
+add_action( 'widgets_init', 'env_studies_load_widget' );
+ 
+
+// Creating the widget 
+class env_studies_widget extends WP_Widget {
+ 
+
+function __construct() {
+  parent::__construct(
+   
+  // Base ID of your widget
+  'env_studies_widget', 
+   
+  // Widget name will appear in UI
+  __('VCU Center for ENVS', 'env_studies_widget_domain'), 
+   
+  // Widget description
+  array( 'description' => __( 'Add env studies box ', 'wpb_widget_domain' ), ) 
+  );
+}
+ 
+// Creating widget front-end
+ 
+public function widget( $args, $instance ) {
+  //$title = apply_filters( 'widget_title', $instance['title'] );
+
+$env_studies = '<div class="col-lg-4"><div class="card"><img class="card-img-top" src="'. THEME_IMG_PATH . 'envs_center.jpg" alt=""><a href="https://ces.vcu.edu/"><div class="card-body hvr-underline-from-center"><h3 class="card-title">Center for Environmental Studies</h3></div></a></div></div>';
+
+ 
+// before and after widget arguments are defined by themes
+  
+      // This is where you run the code and display the output
+      echo __( $env_studies, 'env_studies_widget_domain' );
+    }
+           
+} // Class ${1:this}_widget ends here
+
 
