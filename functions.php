@@ -496,7 +496,7 @@ function altlab_content_shortcode( $atts, $content = null ) {
                        $html .=  get_the_title();
                        $html .= '</h3></a>';  
                        if ($ex){                  
-                        $html .= '<div class="row"><div class="sc-post-content">' .get_the_excerpt() . '</div>';
+                        $html .= '<div class="sc-post-content">' .get_the_excerpt() . '</div>';
                       }
                        $html .= '</div>';          
                      endwhile;
