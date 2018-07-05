@@ -49,7 +49,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 						<?php else : ?>
 
 							<a class="navbar-brand nav-big" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" itemprop="url"><?php bloginfo( 'name' ); ?></a>
-							<a class="navbar-brand nav-small" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" itemprop="url">VCU ENVS</a>
+							<a class="navbar-brand nav-small" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" itemprop="url"><?php bloginfo( 'description' );?></a>
 						<?php endif; ?>
 
 
