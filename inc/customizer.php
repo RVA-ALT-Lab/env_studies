@@ -105,6 +105,31 @@ if ( ! function_exists( 'understrap_theme_customize_register' ) ) {
 					'priority'    => '20',
 				)
 			) );
+		$wp_customize->add_setting( 'background_image_choice', array(
+			'default'           => 'topo',
+			'type'              => 'theme_mod',
+			'sanitize_callback' => 'understrap_theme_slug_sanitize_select',
+			'capability'        => 'edit_theme_options',
+		) );
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'background_image_choice', array(
+					'label'       => __( 'Background Image', 'understrap' ),
+					'description' => __( "Choose your background image", 'understrap' ),
+					'section'     => 'understrap_theme_layout_options',
+					'settings'    => 'background_image_choice',
+					'type'        => 'select',
+					'choices'     => array(
+						'water'       => __( 'Water', 'understrap' ),
+						'waves' => __( 'Waves', 'understrap' ),
+						'computer'       => __( 'Computer', 'understrap' ),
+						'other' => __( 'Other', 'understrap' ),
+					),
+					'priority'    => '10',
+				)
+			) );
 	}
 } // endif function_exists( 'understrap_theme_customize_register' ).
 add_action( 'customize_register', 'understrap_theme_customize_register' );

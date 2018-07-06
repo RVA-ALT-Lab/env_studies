@@ -14,7 +14,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 <?php get_sidebar( 'footerfull' ); ?>
    
 
-  <div class="jumbotron water">   
+  <div class="jumbotron <?php  echo  get_theme_mod( 'background_image_choice' );?>">   
     <div class="container">
       <div class="row">
         <div class="col-lg-12">

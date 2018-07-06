@@ -510,6 +510,7 @@ add_shortcode( 'get-posts', 'altlab_content_shortcode' );
 
 
 
+
 /*
 NO LONGER NEEDED BC OF FUNCTIONAL CHANGES
 
@@ -605,7 +606,9 @@ acf_add_local_field_group(array (
       'choices' => array (
         'Academic Faculty' => 'Academic Faculty',
         'Staff' => 'Staff',
-        'Adjuncts & Affiliates' => 'Adjuncts & Affiliates',       
+        'Adjuncts & Affiliates' => 'Adjuncts & Affiliates',
+        'Emeritus' => 'Emeritus', 
+        'Student' => 'Student',      
       ),
       'allow_custom' => 0,
       'save_custom' => 0,
@@ -753,7 +756,7 @@ acf_add_local_field_group(array (
       'key' => 'field_5b2d078f61d64',
       'label' => 'Author level',
       'name' => 'author_level',
-      'type' => 'select',
+      'type' => 'radio',
       'instructions' => '',
       'required' => 0,
       'conditional_logic' => 0,
@@ -765,6 +768,8 @@ acf_add_local_field_group(array (
       'choices' => array (
         'Undergraduate' => 'Undergraduate',
         'Graduate' => 'Graduate',
+        'Graduate' => 'Graduate',
+        'Undergraduate & Graduate' => 'Undergraduate & Graduate',
       ),
       'allow_custom' => 0,
       'save_custom' => 0,
