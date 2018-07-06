@@ -21,8 +21,8 @@ $container = get_theme_mod( 'understrap_container_type' );
            <a href="https://lifesciences.vcu.edu/"><h2 class="major-section hvr-underline-from-center">VCU Life Sciences</h2></a>
           <div class="row">
             <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Left") ) : ?><?php endif;?>
-            <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Center") ) : ?><?php endif;?>
-            <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Right") ) : ?><?php endif;?>                 
+            <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Center Left") ) : ?><?php endif;?>
+            <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Center Right") ) : ?><?php endif;?>    <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Right") ) : ?><?php endif;?>                                  
           </div>
         </div>
       </div>

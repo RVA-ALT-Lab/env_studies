@@ -60,8 +60,19 @@ if ( function_exists('register_sidebar') )
 
 if ( function_exists('register_sidebar') )
   register_sidebar(array(
-    'name' => 'Custom Zone - Center',
-    'id'            => 'custom-center',    // ID should be LOWERCASE  ! ! !        
+    'name' => 'Custom Zone - Center Left',
+    'id'            => 'custom-center-left',    // ID should be LOWERCASE  ! ! !        
+    'before_widget' => '<div class = "widgetizedArea">',
+    'after_widget' => '</div>',
+    'before_title' => '<h3>',
+    'after_title' => '</h3>',
+  )
+);
+
+if ( function_exists('register_sidebar') )
+  register_sidebar(array(
+    'name' => 'Custom Zone - Center Right',
+    'id'            => 'custom-center-right',    // ID should be LOWERCASE  ! ! !        
     'before_widget' => '<div class = "widgetizedArea">',
     'after_widget' => '</div>',
     'before_title' => '<h3>',
@@ -114,7 +125,7 @@ function __construct() {
 public function widget( $args, $instance ) {
   //$title = apply_filters( 'widget_title', $instance['title'] );
 
-$bio_complex = '<div class="col-lg-4"><div class="card"><img class="card-img-top" src="'. THEME_IMG_PATH . 'bio-complexity.jpg" alt=""><a href="https://csbc.vcu.edu/"><div class="card-body hvr-underline-from-center"><h3 class="card-title">Center for the Study of Biological Complexity</h3></div></a></div></div>';
+$bio_complex = '<div class="col-lg-3"><div class="card"><img class="card-img-top" src="'. THEME_IMG_PATH . 'bio-complexity.jpg" alt=""><a href="https://csbc.vcu.edu/"><div class="card-body hvr-underline-from-center"><h3 class="card-title">Center for the Study of Biological Complexity</h3></div></a></div></div>';
 
  
 // before and after widget arguments are defined by themes
@@ -160,7 +171,7 @@ function __construct() {
 public function widget( $args, $instance ) {
   //$title = apply_filters( 'widget_title', $instance['title'] );
 
-$rice_rivers = '<div class="col-lg-4"><div class="card"><img class="card-img-top" src="'. THEME_IMG_PATH . 'rice-center.jpg" alt=""><a href="https://ricerivers.vcu.edu/"><div class="card-body hvr-underline-from-center"><h3 class="card-title">Rice Rivers Center<br>&nbsp;</h3></div></a></div></div>';
+$rice_rivers = '<div class="col-lg-3"><div class="card"><img class="card-img-top" src="'. THEME_IMG_PATH . 'rice-center.jpg" alt=""><a href="https://ricerivers.vcu.edu/"><div class="card-body hvr-underline-from-center"><h3 class="card-title">Rice Rivers Center<br>&nbsp;</h3></div></a></div></div>';
 
  
 // before and after widget arguments are defined by themes
@@ -205,7 +216,7 @@ function __construct() {
 public function widget( $args, $instance ) {
   //$title = apply_filters( 'widget_title', $instance['title'] );
 
-$life_sci = '<div class="col-lg-4"><div class="card"><img class="card-img-top" src="'. THEME_IMG_PATH . 'env-studies.jpg" alt=""><a href="https://lifesciences.vcu.edu/"><div class="card-body hvr-underline-from-center"><h3 class="card-title">Center for Life Science Education</h3></div></a></div></div>';
+$life_sci = '<div class="col-lg-3"><div class="card"><img class="card-img-top" src="'. THEME_IMG_PATH . 'env-studies.jpg" alt=""><a href="https://lifesciences.vcu.edu/"><div class="card-body hvr-underline-from-center"><h3 class="card-title">Center for Life Science Education</h3></div></a></div></div>';
 
  
 // before and after widget arguments are defined by themes
@@ -250,7 +261,7 @@ function __construct() {
 public function widget( $args, $instance ) {
   //$title = apply_filters( 'widget_title', $instance['title'] );
 
-$env_studies = '<div class="col-lg-4"><div class="card"><img class="card-img-top" src="'. THEME_IMG_PATH . 'envs_center.jpg" alt=""><a href="https://ces.vcu.edu/"><div class="card-body hvr-underline-from-center"><h3 class="card-title">Center for Environmental Studies</h3></div></a></div></div>';
+$env_studies = '<div class="col-lg-3"><div class="card"><img class="card-img-top" src="'. THEME_IMG_PATH . 'envs_center.jpg" alt=""><a href="https://ces.vcu.edu/"><div class="card-body hvr-underline-from-center"><h3 class="card-title">Center for Environmental Studies</h3></div></a></div></div>';
 
  
 // before and after widget arguments are defined by themes

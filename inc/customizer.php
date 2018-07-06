@@ -116,8 +116,8 @@ if ( ! function_exists( 'understrap_theme_customize_register' ) ) {
 			new WP_Customize_Control(
 				$wp_customize,
 				'background_image_choice', array(
-					'label'       => __( 'Background Image', 'understrap' ),
-					'description' => __( "Choose your background image", 'understrap' ),
+					'label'       => __( 'Footer Background Image', 'understrap' ),
+					'description' => __( "Choose your footer background image", 'understrap' ),
 					'section'     => 'understrap_theme_layout_options',
 					'settings'    => 'background_image_choice',
 					'type'        => 'select',
@@ -130,6 +130,7 @@ if ( ! function_exists( 'understrap_theme_customize_register' ) ) {
 					'priority'    => '10',
 				)
 			) );
+
 	}
 } // endif function_exists( 'understrap_theme_customize_register' ).
 add_action( 'customize_register', 'understrap_theme_customize_register' );
