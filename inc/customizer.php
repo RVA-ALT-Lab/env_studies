@@ -105,8 +105,10 @@ if ( ! function_exists( 'understrap_theme_customize_register' ) ) {
 					'priority'    => '20',
 				)
 			) );
-		$wp_customize->add_setting( 'background_image_choice', array(
-			'default'           => 'topo',
+
+		//body background image
+		$wp_customize->add_setting( 'body_background_image_choice', array(
+			'default'           => 'ice',
 			'type'              => 'theme_mod',
 			'sanitize_callback' => 'understrap_theme_slug_sanitize_select',
 			'capability'        => 'edit_theme_options',
@@ -115,11 +117,38 @@ if ( ! function_exists( 'understrap_theme_customize_register' ) ) {
 		$wp_customize->add_control(
 			new WP_Customize_Control(
 				$wp_customize,
-				'background_image_choice', array(
+				'body_background_image_choice', array(
+					'label'       => __( 'Body Background Image', 'understrap' ),
+					'description' => __( "Choose your body background image", 'understrap' ),
+					'section'     => 'understrap_theme_layout_options',
+					'settings'    => 'body_background_image_choice',
+					'type'        => 'select',
+					'choices'     => array(
+						'ice'       => __( 'Ice', 'understrap' ),
+						'waves' => __( 'Waves', 'understrap' ),
+						'computer'       => __( 'Computer', 'understrap' ),
+						'other' => __( 'Other', 'understrap' ),
+					),
+					'priority'    => '10',
+				)
+			) );
+
+		//footer background image
+		$wp_customize->add_setting( 'footer_background_image_choice', array(
+			'default'           => 'water',
+			'type'              => 'theme_mod',
+			'sanitize_callback' => 'understrap_theme_slug_sanitize_select',
+			'capability'        => 'edit_theme_options',
+		) );
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'footer_background_image_choice', array(
 					'label'       => __( 'Footer Background Image', 'understrap' ),
 					'description' => __( "Choose your footer background image", 'understrap' ),
 					'section'     => 'understrap_theme_layout_options',
-					'settings'    => 'background_image_choice',
+					'settings'    => 'footer_background_image_choice',
 					'type'        => 'select',
 					'choices'     => array(
 						'water'       => __( 'Water', 'understrap' ),
