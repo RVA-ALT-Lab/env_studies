@@ -141,7 +141,7 @@ function the_faculty_expertise(){
    global $post;
    $expertise = get_field( "area_of_expertise", $post->ID );
    if ($expertise){
-    return '<div class="expertise">Area of expertise: '.$expertise.'</div>';
+    return '<div class="expertise">'.$expertise.'</div>';
    }
 }
 
