@@ -13,16 +13,19 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 <?php get_sidebar( 'footerfull' ); ?>
    
-
-  <div class="jumbotron <?php  echo  get_theme_mod( 'background_image_choice' );?>">   
+  <div class="jumbotron base-trio <?php echo get_theme_mod( 'body_background_image_choice' );?>">   
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
            <a href="https://lifesciences.vcu.edu/"><h2 class="major-section hvr-underline-from-center">VCU Life Sciences</h2></a>
           <div class="row">
             <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Left") ) : ?><?php endif;?>
+            
             <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Center Left") ) : ?><?php endif;?>
-            <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Center Right") ) : ?><?php endif;?>    <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Right") ) : ?><?php endif;?>                                  
+           
+            <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Center Right") ) : ?><?php endif;?>    
+
+            <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Custom Zone - Right") ) : ?><?php endif;?>                                  
           </div>
         </div>
       </div>

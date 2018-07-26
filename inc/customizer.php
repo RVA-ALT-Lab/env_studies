@@ -108,7 +108,7 @@ if ( ! function_exists( 'understrap_theme_customize_register' ) ) {
 
 		//body background image
 		$wp_customize->add_setting( 'body_background_image_choice', array(
-			'default'           => 'ice',
+			'default'           => 'water',
 			'type'              => 'theme_mod',
 			'sanitize_callback' => 'understrap_theme_slug_sanitize_select',
 			'capability'        => 'edit_theme_options',
@@ -125,7 +125,7 @@ if ( ! function_exists( 'understrap_theme_customize_register' ) ) {
 					'type'        => 'select',
 					'choices'     => array(
 						'ice'       => __( 'Ice', 'understrap' ),
-						'waves' => __( 'Waves', 'understrap' ),
+						'water' => __( 'Water', 'understrap' ),
 						'computer'       => __( 'Computer', 'understrap' ),
 						'other' => __( 'Other', 'understrap' ),
 					),
