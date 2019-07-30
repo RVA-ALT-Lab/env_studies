@@ -53,6 +53,61 @@ li.active {
   z-index: 100;
 }
 
+//************************SKIP-TO-CONTENT STUFF************************
+
+#skip-links {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin-left: 0;
+    list-style: outside none;
+}
+#skip-links a {
+    position: absolute;
+    left: 15px;
+    top: -100px;
+    z-index: 100000;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px 15px;
+    background-color: transparent;
+    color: #ffba00;
+    outline: none;
+    transition: top 0.2s, background-color 0.2s;
+}
+#skip-links a:focus, #skip-links a:hover {
+    top: 0;
+    background-color: #333;
+}
+
+//************************SKIP-TO-CONTENT STUFF************************
+
+#skip-links {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin-left: 0;
+    list-style: outside none;
+}
+#skip-links a {
+    position: absolute;
+    left: 15px;
+    top: -100px;
+    z-index: 100000;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px 15px;
+    background-color: transparent;
+    color: #ffba00;
+    outline: none;
+    transition: top 0.2s, background-color 0.2s;
+}
+#skip-links a:focus, #skip-links a:hover {
+    top: 0;
+    background-color: #333;
+}
 
 //************************BASIC CONTENT CHOICES************************
 article a, .faculty-contact-info a {

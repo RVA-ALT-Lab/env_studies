@@ -8,7 +8,7 @@
 ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 	<header class="entry-header publication">
-    <!--<h1 class="publication-title"><?php //echo get_the_title();?></h1> REMOVE IF DROPPING PERMANANTLY -->  		
+    <h1 class="publication-title"><?php echo get_the_title();?></h1>   		
 	</header><!-- .entry-header -->
 
   <div class="row the-publication-row">
@@ -20,9 +20,9 @@
         ?>
     </div>
     <div class="col-md-8 publication-content">  
-      <h1 class="the-pub"><?php echo the_pub_authors();?> (<?php echo the_pub_year();?>) <?php the_title(); echo the_pub_title(); echo the_pub_issue(); echo the_pub_pages(); echo the_pub_link();?></h1>
-      <h3 id="abstract-button">Abstract<span id="abstract-status"> +</span></h3>
-      <div class="the-abstract hide" id="abstract-container">
+      <div class="the-pub"><?php echo the_pub_authors();?> (<?php echo the_pub_year();?>) <?php the_title(); echo the_pub_title(); echo the_pub_issue(); echo the_pub_pages(); echo the_pub_link();?></div>
+      <div class="the-abstract" id="abstract-container">
+        <h3>Abstract</h3>
         <?php the_content();?>    
       </div>       
     </div>   
