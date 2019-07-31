@@ -200,11 +200,11 @@ function the_pub_authors(){
    }
 }
 
-function the_pub_author_level(){
+function get_the_pub_author_level(){
    global $post;
    $level = get_field( "author_level", $post->ID );
-   if ($level){
-    return strtolower($level[0]);
+   if ($level && $level != 'None'){
+    return $level . ' Author(s)';
    }
 }
 
@@ -766,6 +766,7 @@ acf_add_local_field_group(array (
         'id' => '',
       ),
       'choices' => array (
+        'None' => 'None',
         'Undergraduate' => 'Undergraduate',
         'Graduate' => 'Graduate',
         'Graduate' => 'Graduate',

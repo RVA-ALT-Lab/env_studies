@@ -8,7 +8,8 @@
 ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 	<header class="entry-header publication">
-    <h1 class="publication-title"><?php echo get_the_title();?></h1>   		
+    <h1 class="publication-title"><?php echo get_the_title();?></h1> 
+    <div class="author-level-flag"><?php echo get_the_pub_author_level();?></div>  		
 	</header><!-- .entry-header -->
 
   <div class="row the-publication-row">
