@@ -90,22 +90,22 @@ require get_template_directory() . '/inc/custom-post-types.php';
 //ADD FONTS and VCU Brand Bar
 add_action('wp_enqueue_scripts', 'alt_lab_scripts');
 function alt_lab_scripts() {
-	$query_args = array(
-		'family' => 'Roboto:300,400,700|Old+Standard+TT:400,700|Oswald:400,500,700',
-		'subset' => 'latin,latin-ext',
-	);
-	wp_enqueue_style ( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
+  $query_args = array(
+    'family' => 'Roboto:300,400,700|Old+Standard+TT:400,700|Oswald:400,500,700',
+    'subset' => 'latin,latin-ext',
+  );
+  wp_enqueue_style ( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
 
-	wp_enqueue_script( 'vcu_brand_bar', 'https:///branding.vcu.edu/bar/academic/latest.js', array(), '1.1.1', true );
+  wp_enqueue_script( 'vcu_brand_bar', 'https:///branding.vcu.edu/bar/academic/latest.js', array(), '1.1.1', true );
 
-	wp_enqueue_script( 'alt_lab_js', get_template_directory_uri() . '/js/alt-lab.js', array(), '1.1.1', true );
+  wp_enqueue_script( 'alt_lab_js', get_template_directory_uri() . '/js/alt-lab.js', array(), '1.1.1', true );
 
     }
 
 
 function bannerMaker(){
-	global $post;
-	 if ( get_the_post_thumbnail_url( $post->ID ) && $post->post_type === 'page' ) {
+  global $post;
+   if ( get_the_post_thumbnail_url( $post->ID ) && $post->post_type === 'page' ) {
       //$thumbnail_id = get_post_thumbnail_id( $post->ID );
       $thumb_url = get_the_post_thumbnail_url($post->ID);
       //$alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
@@ -394,10 +394,10 @@ function altlab_publication_shortcode( $atts, $content = null ) {
                     $the_pub_query = new WP_Query( $args );
                     if( $the_pub_query->have_posts() ): 
                       while ( $the_pub_query->have_posts() ) : $the_pub_query->the_post(); 
-                     $html .= '<div class="row the-publication-row year-'.the_pub_year_class().' ' . the_pub_author_level() . '"><div class="col-md-4">';                         
+                     $html .= '<div class="row the-publication-row year-'.the_pub_year_class().' ' . get_the_pub_author_level() . '"><div class="col-md-4">';
                              if ( has_post_thumbnail() ) {
                                $html .=  get_the_post_thumbnail(get_the_ID(),'large', array('class' => 'publication-image responsive', 'alt' => 'Document image.'));
-                        }                         
+                        }       
                        $html .= '</div><div class="col-md-8 publication-content"><h1 class="the-pub">';
                        $html .= the_pub_authors();
                        $html .= the_pub_year();
@@ -406,7 +406,8 @@ function altlab_publication_shortcode( $atts, $content = null ) {
                        $html .= the_pub_issue(); 
                        $html .= the_pub_pages(); 
                        $html .= the_pub_link();                     
-                       $html .= '</h1><button data-toggle="collapse" data-target="#post-' . get_the_ID(). '" class="abstract-button">Abstract</button><div class="the-abstract abstract-container collapse" id="post-' . get_the_ID(). '">';
+                       $html .= '</h1><div class="author-level-flag">'. get_the_pub_author_level() . '</div>';
+                       $html .= '<button data-toggle="collapse" style="display:block" data-target="#post-' . get_the_ID(). '" class="abstract-button">Abstract</button><div class="the-abstract abstract-container collapse" id="post-' . get_the_ID(). '">';
                        $html .= get_the_content();
                          $html .= '</div></div></div>';                
                      endwhile;
