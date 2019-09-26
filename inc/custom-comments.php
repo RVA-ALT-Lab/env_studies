@@ -63,13 +63,3 @@ if ( ! function_exists( 'understrap_bootstrap_comment_form' ) ) {
 		return $args;
 	}
 } // endif function_exists( 'understrap_bootstrap_comment_form' )
-
-
-
-//make comment title an h2 instead of h3
-add_filter( 'comment_form_defaults', 'custom_reply_title' );
-function custom_reply_title( $defaults ){
-  $defaults['title_reply_before'] = '<h2 id="reply-title" class="comment-reply-title" style="">';
-  $defaults['title_reply_after'] = '</h2>';
-  return $defaults;
-}

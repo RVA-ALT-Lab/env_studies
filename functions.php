@@ -184,8 +184,7 @@ function the_faculty_group() {
   $group = get_field( "staff_group", $post->ID );
 
   if( $group ) {
-    foreach ($group as $the_group )    
-      return strtolower($the_group);
+     return strtolower($the_group);
   } 
 }
 
@@ -331,7 +330,7 @@ function add_faculty_type_to_json() {
 function faculty_return_type( $object, $field_name, $request ) {
     global $post;
     $faculty_type = get_field('staff_group', $post->ID); 
-    return $faculty_type[0];
+    return $faculty_type;
 }
 
 //allow filtering of that JSON by the new field
@@ -595,7 +594,7 @@ acf_add_local_field_group(array (
       'key' => 'field_5b29104bb299c991',
       'label' => 'Staff Group',
       'name' => 'staff_group',
-      'type' => 'checkbox',
+      'type' => 'radio',
       'instructions' => '',
       'required' => 0,
       'conditional_logic' => 0,
@@ -607,7 +606,8 @@ acf_add_local_field_group(array (
       'choices' => array (
         'Academic Faculty' => 'Academic Faculty',
         'Staff' => 'Staff',
-        'Adjuncts & Affiliates' => 'Adjuncts & Affiliates',
+        'Adjunct Faculty' => 'Adjunct Faculty',
+        'Affiliated Faculty' => 'Affiliated Faculty',
         'Emeritus' => 'Emeritus', 
         'Student' => 'Student',      
       ),
