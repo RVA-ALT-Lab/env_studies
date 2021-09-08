@@ -122,9 +122,11 @@ function the_faculty_degree() {
   $degrees = get_field( "degree", $post->ID );
 
   if( $degrees ) {
-    foreach ($degrees as $degree )    
-      return ', '.$degree;
-  } 
+    $all_degrees = '';
+    foreach ($degrees as $degree )
+      $all_degrees .= ', '.$degree;
+  }
+  return $all_degrees;
 }
 
 function the_faculty_title() {
@@ -132,9 +134,11 @@ function the_faculty_title() {
   $titles = get_field( "title", $post->ID );
 
   if( $titles ) {
+    $all_titles = '';
     foreach ($titles as $title )    
-      return '<div class="title">'.$title.'</div>';
+      $all_titles .= '<div class="title">'.$title.'</div>';
   } 
+  return $all_titles;
 }
 
 function the_faculty_expertise(){
@@ -285,14 +289,17 @@ function altlab_faculty_shortcode( $atts, $content = null ) {
                     // query
                     $the_query = new WP_Query( $args );
                     if( $the_query->have_posts() ): 
-                      while ( $the_query->have_posts() ) : $the_query->the_post(); 
-                      $html .= '<div class="row the-faculty">';
+                      while ( $the_query->have_posts() ) : $the_query->the_post();
+                      $html .= '<div class="row the-faculty" id="';
+                      $html .= basename(get_permalink(get_the_ID()));
+                      $html .= '">';
                       $html .= '<div class="faculty-img col-md-4">';
                         if ( has_post_thumbnail() ) {
                         $html .=  get_the_post_thumbnail(get_the_ID(),'large', array('class' => 'faculty-bio-image responsive', 'alt' => 'Faculty portrait.'));
                         }  
                        $html .= '</div><div class="col-md-8"><h2 class="faculty-title">';
-                       $html .=  get_the_title(); the_faculty_degree();
+                       $html .= get_the_title();
+                       $html .= the_faculty_degree();
                        $html .= '</h2><div class="row"><div class="col-md-6 faculty-bio-content"><div class="faculty-titles">';
                        $html .= the_faculty_title();
                        $html .= '</div>';
@@ -580,6 +587,7 @@ acf_add_local_field_group(array (
         'Director' => 'Director',
         'Full Professor' => 'Full Professor',
         'Graduate Program Director' => 'Graduate Program Director',
+        'Director of Advising' => 'Director of Advising',
         'Instructor' => 'Instructor',
       ),
       'allow_custom' => 0,
